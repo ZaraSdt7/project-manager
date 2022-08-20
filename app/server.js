@@ -1,15 +1,17 @@
-const path=require("path");
-module.exports= class Application{
+const { AllRouter } = require("./routes/router");
+
+module.exports= class Application{  //oop
     #express=require("express");
     #app=this.#express();
     constructor(PORT,DB_URL){
-     this.configDatabase(DB_URL)
-     this.configApllication()
-     this.createServer(PORT)
-     this.createRouters()
-     this.errorHandler()
+        this.configDatabase(DB_URL)
+        this.configApllication()
+        this.createServer(PORT)
+        this.createRouters()
+        this.errorHandler()
     }
     configApllication(){
+    const path=require("path");
     this.#app.use(this.#express.json());
     this.#app.use(this.#express.urlencoded({extended:true}))
     this.#app.use(this.#express.static(path.join(__dirname,"..","public")))    
@@ -26,7 +28,7 @@ module.exports= class Application{
      const http=require("http");
      const server=http.createServer(this.#app)
      server.listen(PORT,()=>{
-        console.log(`server run > on http://localhost:$(PORT)`);
+        console.log(`server run > on http://localhost:${PORT}`);
      })
     }
     createRouters(){
@@ -35,7 +37,7 @@ module.exports= class Application{
       message:" this is new express application"  
      })   
     })    
-
+    this.#app.use(AllRouter)
     }
     errorHandler(){
     this.#app.use((req,res,next)=>{
