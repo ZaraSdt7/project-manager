@@ -8,7 +8,8 @@ role:{type:[String],default:["USER"]},
 email:{type:String,require:true,unique:true},
 password:{type:String,require:true},
 skills:{type:[String],default:[]},
-team:{type:[mongoose.Types.ObjectId],default:[]}
+team:{type:[mongoose.Types.ObjectId],default:[]},
+token:{type:String,default:[]}
 },{
 
 timestamps:true

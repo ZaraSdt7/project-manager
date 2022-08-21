@@ -19,8 +19,13 @@
   "homepage": "https://github.com/zahra994/project-manager#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-validator": "^6.14.2",
-    "mongoose": "^6.5.1"
+    "json": "^11.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.1",
+    "token": "^0.1.0",
+    "web": "^0.0.2"
   }
 }

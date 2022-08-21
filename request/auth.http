@@ -4,11 +4,25 @@ POST http://localhost:8000/auth/register
 Content-Type:application/json
 
 {
- "user_name":"zahrasd",
- "email":"zahrast@google.com",
- "mobile":"09363096180",
+ "user_name":"zahraa",
+ "email":"zahraast@google.com",
+ "mobile":"09363096140",
  "password":"123456",
  "confirm_password":"123456"
 
 
+}
+
+
+
+### login request
+
+POST http://localhost:8000/auth/login
+Content-Type:application/json
+Authorization: Bearer {{${{$dotenv token}}}}
+
+{
+ "user_name":"zahraa",
+ "password":"123456"
+ 
 }

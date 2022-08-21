@@ -33,4 +33,20 @@ function registervalidator(){
         })
     ]
 }
-module.exports={registervalidator:new registervalidator}
+function loginvalidation(){
+return[
+body("user_name").notEmpty().withMessage("username is not empty")
+.custom(username =>{
+const usernameregex=/^[a-z]+[a-z 0-9\_\.]/gi;
+if(usernameregex.test(username)){
+    return true;
+}
+throw "username or password is not true"
+}),
+body("password").isLength({min:6,max:16}).withMessage("password is length between is 6 and 8")
+
+
+
+]
+}
+module.exports={registervalidator,loginvalidation}
