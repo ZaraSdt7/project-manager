@@ -8,4 +8,9 @@ function hashstring(str){
     const token=jwt.sign(payload,process.env.SECRET_KEY,{expiresIn:"100 days"})
     return token;
  }
-module.exports={hashstring,tokengenerator}
+ function jwttokenverify(token){
+  const result=jwt.verify(token,process.env.SECRET_KEY);
+  if(!result?.user_name) throw {status:401,message:"please login in your account"}
+  return result;   
+ }
+module.exports={hashstring,tokengenerator,jwttokenverify}

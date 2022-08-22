@@ -19,7 +19,7 @@ Content-Type:application/json
 
 POST http://localhost:8000/auth/login
 Content-Type:application/json
-Authorization: Bearer {{${{$dotenv token}}}}
+Authorization: Bearer {{$dotenv token}}
 
 {
  "user_name":"zahraa",
