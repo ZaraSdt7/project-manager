@@ -1,0 +1,9 @@
+### create project
+POST http://localhost:8000/project/create
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+    "title":"this is first my project!!!",
+    "text":"i like programming..i wish i a big programmer"
+}

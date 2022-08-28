@@ -73,5 +73,5 @@ RejectInviteInTeam(){
 }    
 }
 module.exports={
- UserController:new UserController   
+ UserController:new UserController()   
 }

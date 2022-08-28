@@ -45,5 +45,5 @@ resetpassword(){
 
 }
 module.exports={
-     AuthController:new AuthController
+     AuthController:new AuthController()
 }
