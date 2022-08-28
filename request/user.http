@@ -1,5 +1,5 @@
 ### request getprofile
-http://localhost:8000/user/profile
+GET  http://localhost:8000/user/profile
 Authorization: Bearer {{$dotenv token}}
 
 
