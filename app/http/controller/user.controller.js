@@ -2,6 +2,7 @@ const { set } = require("mongoose");
 const { usermodel } = require("../../models/user");
 
 class UserController{
+
 getProfile(req,res,next){
 try {
  const user=req.user;   
@@ -44,7 +45,15 @@ return res.status(200).json({
 }
 async UploadProfileImage(req,res,next){
     try {
-     console.log(req.file);   
+    const userID=req.user._id;
+    const filePath=req.file?.path?.substring(7);
+    const result=await usermodel.updateOne({_id:userID},{$set : {profile_image:filePath}});
+    if(result.modifiedCount == 0) throw{status:400,message:"Update failed"}
+    return res.status(200).json({
+        status:200,
+        success:true,
+        message:"Update done!"
+    })
     } catch (error) {
         next(error)
     }

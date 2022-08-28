@@ -7,7 +7,7 @@ const storage=multer.diskStorage({
      cb(null,createPathUpload());   
     },
     filename:(req,file,cb)=>{
-     const type=path.extname(file.filename);
+     const type=path.extname(file.originalname);
      cb(null,Date.now() + type);   
     }
 })

@@ -21,7 +21,6 @@ return res.json(user);
  try {
  const {user_name,password}=req.body;
  const user=await usermodel.findOne({user_name});
- console.log(req.headers);
  if(!user) throw {status:401,message:"username or password is not true"}
  const resultcompare=bcrypt.compareSync(password,user.password)
  if(!resultcompare) throw {status:401,message:"username or password invalid"}

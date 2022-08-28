@@ -7,6 +7,7 @@ mobile:{type:String,require:true,unique:true},
 role:{type:[String],default:["USER"]},
 email:{type:String,require:true,unique:true},
 password:{type:String,require:true},
+profile_image:{type:String,require:false},
 skills:{type:[String],default:[]},
 team:{type:[mongoose.Types.ObjectId],default:[]},
 token:{type:String,default:[]}
