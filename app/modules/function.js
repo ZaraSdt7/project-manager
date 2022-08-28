@@ -1,5 +1,7 @@
 const bcrypt=require("bcrypt");
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
+const path=require("path");
+const fs=require("fs");
 function hashstring(str){
     const salt=bcrypt.genSaltSync(10);
     return bcrypt.hashSync(str,salt)
@@ -13,4 +15,15 @@ function hashstring(str){
   if(!result?.user_name) throw {status:401,message:"please login in your account"}
   return result;   
  }
-module.exports={hashstring,tokengenerator,jwttokenverify}
+ function createPathUpload(){
+    let d=new Date();
+    const year=d.getFullYear() + "";
+    const month="" +d.getMonth();
+    const day="" +d.getDate();
+    const PathUpload=path.join(__dirname,"..","..","public","uploads",year,month,day);
+    fs.mkdirSync(PathUpload,{recursive:true});
+    return path.join("public","uploads",year,month,day);
+     
+ }
+//console.log(createPathUpload());
+module.exports={hashstring,tokengenerator,jwttokenverify,createPathUpload}

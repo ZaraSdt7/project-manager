@@ -1,3 +1,16 @@
 ### request getprofile
 http://localhost:8000/user/profile
 Authorization: Bearer {{$dotenv token}}
+
+
+###edit user profile
+POST   http://localhost:8000/user/profile
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+
+    "frist_name":"Zahra",
+    "last_name":"Sadati",
+    "skills":["programmer","nodejs","backend"]
+}

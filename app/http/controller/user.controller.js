@@ -1,3 +1,6 @@
+const { set } = require("mongoose");
+const { usermodel } = require("../../models/user");
+
 class UserController{
 getProfile(req,res,next){
 try {
@@ -11,8 +14,40 @@ return res.status(200).json({
     next(error)
 }
 }
-editProfile(){
+ async editProfile(req,res,next){
+    try {
+    let data={...req.body};
+    const userID=req.user._id;
+    let fields=["frist_name","last_name","skills"];
+    let badvalue=[""," ",0,null,-1,undefined,NaN,[],{}];
+    Object.entries(data).forEach(([key,value])=>{
+     console.log(key,value);
+     if(!fields.includes(key)) delete data[key];
+     if(badvalue.includes(value)) delete data[key];
+    
+    })
+    console.log(data);
+    const result=await usermodel.updateOne({_id:userID},{$set:data})
+    if(result.modifiedCount>0){
+     return res.status(200).json({
+      status:200,
+      success:true,
+      message:"Update Success"  
+     })   
+    } 
+    throw {status:400,message:"Update Unsuccess..."}   
+        
+    } catch (error) {
+    next(error)
+    }
 
+}
+async UploadProfileImage(req,res,next){
+    try {
+     console.log(req.file);   
+    } catch (error) {
+        next(error)
+    }
 }
 addSkill(){
 
