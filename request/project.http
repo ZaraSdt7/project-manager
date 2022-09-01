@@ -7,3 +7,17 @@ Content-Type: application/json
     "title":"this is first my project!!!",
     "text":"i like programming..i wish i a big programmer"
 }
+
+###get All Project
+
+GET  http://localhost:8000/project/list
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+
+### get ByID Project
+
+GET  http://localhost:8000/project/630b8d56388112e1d7745dd9
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
