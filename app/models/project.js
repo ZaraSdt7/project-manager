@@ -5,7 +5,8 @@ const projectschema=new mongoose.Schema({
  image:{type:String,default:"/default/picture.png"},
  owner:{type:mongoose.Types.ObjectId,require:true},
  team:{type:mongoose.Types.ObjectId},
- private:{type:Boolean,default:true}
+ private:{type:Boolean,default:true},
+ tags:{type:[String],default:[]}
 },{
     timestamps:true
 })

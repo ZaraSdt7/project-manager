@@ -7,9 +7,9 @@ class ProjectController{
     }
 async createprojet(req,res,next){
 try {
- const {title,text,image}=req.body;
+ const {title,text,image,tags}=req.body;
  const owner=req.user._id;
- const prj_result=await projectmodel.create({title,text,owner,image})
+ const prj_result=await projectmodel.create({title,text,owner,image,tags})
  if(!prj_result) throw {status:400,message:"There was a problem with adding the project "}
  return res.status(201).json({
     status:201,
