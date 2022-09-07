@@ -40,7 +40,7 @@ return res.status(200).json({
 
 }
 async findproject(projetID,owner){
- const projet=await projectmodel.findOne({owner,projetID});
+ const projet=await projectmodel.findOne({projetID,owner});
  if(!projet) throw{status:404,message:"Project Not Found.."}
  return projet;   
 }
