@@ -4,8 +4,8 @@ Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
 
 {
-    "title":"this is first my project!!!",
-    "text":"i like programming..i wish i a big programmer"
+    "title":"zahra!!!",
+    "text":"i wish i a big programmer"
 }
 
 ###get All Project
@@ -19,5 +19,24 @@ Content-Type: application/json
 ### get ByID Project
 
 GET  http://localhost:8000/project/630b8d56388112e1d7745dd9
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+### update porject
+
+PUT  http://localhost:8000/project/edit/630b8d56388112e1d7745dd9
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+{
+    "title":"",
+    "text":"",
+    "tags":["",""]
+}
+
+### remove porject
+
+DELETE http://localhost:8000/project/remove/630b8d56388112e1d7745dd9
 Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json

@@ -25,5 +25,8 @@ function hashstring(str){
     return path.join("public","uploads",year,month,day);
      
  }
+ function createlinkforfile(fileAddress,req){
+   return req.protocol + "://" + req.get("host") + "/" +(fileAddress.replace(/[\\\\]/gm, "/"));
+ }
 //console.log(createPathUpload());
-module.exports={hashstring,tokengenerator,jwttokenverify,createPathUpload}
+module.exports={hashstring,tokengenerator,jwttokenverify,createPathUpload,createlinkforfile}

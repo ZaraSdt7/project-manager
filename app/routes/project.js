@@ -10,5 +10,6 @@ router.post("/create",fileupload(),uploadfile,checklogin,CreateProjectValidator(
 router.get("/list",checklogin,ProjectController.getAllproject)
 router.get("/:id",checklogin,mongoIDvalidation(),expressvalidatorMapper,ProjectController.getProjectById)
 router.delete("/remove/:id",checklogin,mongoIDvalidation(),expressvalidatorMapper,ProjectController.RemoveProject)
-router.post("/edit/:id",checklogin,mongoIDvalidation(),expressvalidatorMapper,ProjectController.UpdateProject)
+router.put("/edit/:id",checklogin,mongoIDvalidation(),expressvalidatorMapper,ProjectController.UpdateProject)
+router.patch("/edit-project-image/:id",fileupload(),checklogin,uploadfile,mongoIDvalidation(),expressvalidatorMapper,ProjectController.UpdateProjectImage);
 module.exports={projectRouter:router}
