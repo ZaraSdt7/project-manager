@@ -1,0 +1,18 @@
+###  create team
+POST http://localhost:8000/team/create
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+{
+    "name":"zahra",
+    "description":"about programmin",
+    "user_name":"zahra73"
+}
+
+
+### get list team
+
+http://localhost:8000/team/list
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
