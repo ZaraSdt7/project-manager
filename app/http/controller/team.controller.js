@@ -35,6 +35,56 @@ class TeamController{
     }
 
 }
+async getTeamByID(req,res,next){
+    try {
+     const teamID=req.params.id;
+     const team=await teammodel.findById(teamID)
+     if(!team) throw {status:500,message:"team not found..."}
+     return res.status(201).json({
+        status:200,
+        success:true,
+        team
+     })   
+    } catch (error) {
+       next(error) 
+    }
+}
+
+async getMyTeams(req,res,next){
+    try {
+     const userID=req.user._id;
+     const team=await teammodel.find({
+    $or:[
+        {owner:userID},
+        {user:userID}
+    ]
+     })
+     return res.status(201).json({
+        status:200,
+        success:true,
+        team
+     })   
+    } catch (error) {
+        next(error)
+    }
+}
+
+async removeTeamByID(req,res,next){
+    try {
+    const teamID=req.params.id;
+    const team= await teammodel.findById(teamID);
+    if(!team) throw {status:500,message:" the team  was not found"}
+    const resultDelete=await teammodel.deleteOne({_id:teamID});
+    if(resultDelete.deletedCount == 0) throw {status:500,message:"The team was not deleted"}  
+    return res.status(201).json({
+        status:201,
+        success:true,
+        message:"the team was deleted!"
+    })  
+    } catch (error) {
+        next(error)
+    }
+}
 inviteUsertoTeam(){
 
 }
