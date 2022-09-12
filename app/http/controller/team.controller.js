@@ -1,6 +1,11 @@
+const autoBind = require("auto-bind");
 const { teammodel } = require("../../models/team");
+const { usermodel } = require("../../models/user");
 
 class TeamController{
+    constructor(){
+        autoBind(this)
+    }
  async createTeam(req,res,next){
     try {
     const {user_name,description,name}=req.body;
@@ -85,8 +90,41 @@ async removeTeamByID(req,res,next){
         next(error)
     }
 }
-inviteUsertoTeam(){
-
+async findUserTeam(teamID,userID) {
+const result=await teammodel.findOne({
+    $or:[{owner:userID},{users:userID}],_id:teamID
+})
+return !! result
+    
+}
+async inviteUsertoTeam(req,res,next){
+try {
+const userID=req.user._id;
+const {user_name,teamID}=req.params;
+const team=await this.findUserTeam(teamID,userID);
+if(!team) throw {status:400,message:"No team was found to invite"}
+const user=await usermodel.findOne({user_name})
+if(!user) throw {status:400,message:"The  user to invite to the team was not found"} 
+const inviteUser=await this.findUserTeam(teamID,user._id)
+if(inviteUser) throw {status:400,message:"The user has already been invited to the team"} 
+const request=
+{caller:req.user.user_name,
+    requestDate:new Date(),
+    teamID,
+    Status:"pending"
+}
+const updateUserResult=await usermodel.updateOne({user_name},{
+    $push:{inviteRequests:request}
+})
+if(updateUserResult.modifiedCount == 0) throw{status:500,message:"The invitation request was not registered"} 
+return res.status(200).json({
+    status:200,
+    success:true,
+    message:"Invitation registration successfully created"
+})
+} catch (error) {
+   next(error) 
+}
 }
 RemoveTeam(){
 
