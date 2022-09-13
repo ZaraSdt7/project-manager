@@ -60,6 +60,17 @@ async UploadProfileImage(req,res,next){
         next(error)
     }
 }
+async getAllRequest(req,res,next){
+    try {
+    const userID=req.user._id;
+    const {inviteRequests}=await usermodel.findOne({_id:userID},{inviteRequests:1});
+    return res.json({
+        requests:inviteRequests || []
+    })
+    } catch (error) {
+       next(error) 
+    }
+}
 addSkill(){
 
 }

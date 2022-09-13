@@ -14,3 +14,8 @@ Content-Type: application/json
     "last_name":"Sadati",
     "skills":["programmer","nodejs","backend"]
 }
+
+### get all request for user
+GET    http://localhost:8000/user/requests
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json

@@ -9,4 +9,5 @@ const router=require("express").Router();
 router.get("/profile",checklogin,UserController.getProfile)
 router.post("/profile",checklogin,UserController.editProfile)
 router.post("/profile-image",uploadmulter.single("image"),ImageValidation(),expressvalidatorMapper,checklogin,UserController.UploadProfileImage)
+router.get("/requests",checklogin,UserController.getAllRequest)
 module.exports={userRouter:router}

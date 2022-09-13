@@ -22,7 +22,7 @@ Content-Type:application/json
 Authorization: Bearer {{$dotenv token}}
 
 {
- "user_name":"zahraa",
+ "user_name":"zahra",
  "password":"123456"
  
 }

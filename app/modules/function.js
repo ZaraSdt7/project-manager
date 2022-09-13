@@ -26,7 +26,7 @@ function hashstring(str){
      
  }
  function createlinkforfile(fileAddress,req){
-   return req.protocol + "://" + req.get("host") + "/" +(fileAddress.replace(/[\\\\]/gm, "/"));
+   return fileAddress? (req.protocol + "://" + req.get("host") + "/" +(fileAddress.replace(/[\\\\]/gm, "/"))) : undefined;
  }
 //console.log(createPathUpload());
 module.exports={hashstring,tokengenerator,jwttokenverify,createPathUpload,createlinkforfile}
