@@ -19,3 +19,9 @@ Content-Type: application/json
 GET    http://localhost:8000/user/requests
 Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
+
+
+### get  request by status
+GET    http://localhost:8000/user/requests/pending
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json

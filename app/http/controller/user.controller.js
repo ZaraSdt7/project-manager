@@ -71,6 +71,37 @@ async getAllRequest(req,res,next){
        next(error) 
     }
 }
+async getRequestByStatus(req,res,next){
+    try {
+    const{Status}=req.params;
+    const userID=req.user._id;
+    const requests=await usermodel.aggregate([
+     {
+        $match:{_id:userID}
+     },
+     {
+        $project:
+        {inviteRequests:1,
+        _id:0,
+        inviteRequests:{
+            $filter:{
+            input:"$inviteRequests",
+            as:"request",
+            cond:{
+                $eq:["$$request.Status",Status]
+            }
+    }}
+    }}   
+    ])   
+    return res.status(200).json({
+        status:200,
+        success:true,
+        requests:requests?.[0]?.inviteRequests ||[]
+    }) 
+    } catch (error) {
+       next(error) 
+    }
+}
 addSkill(){
 
 }
