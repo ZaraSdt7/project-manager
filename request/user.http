@@ -25,3 +25,9 @@ Content-Type: application/json
 GET    http://localhost:8000/user/requests/pending
 Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
+
+
+### change status request
+GET    http://localhost:8000/user/change-status-request/631eed1634a2b474ee5439d1/rejected
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json

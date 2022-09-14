@@ -102,18 +102,30 @@ async getRequestByStatus(req,res,next){
        next(error) 
     }
 }
-addSkill(){
+async ChangeStatusRequest(req,res,next){
+    try {
+    const {id,Status}=req.params;
+    const request=await usermodel.findOne({"inviteRequests._id":id})
+    if(!request) throw {status:404,message:"No request was found with this specification"} 
+    const findRequest=request.inviteRequests.find(item=>item.id==id)
+    if(findRequest.Status!=="pending") throw {status:400,message:"This request has already been rejected or accepted"}
+    if(!["accepted","rejected"].includes(Status)) throw {status:400, message:"The information sent is not correct"} 
+    const updateresult=await usermodel.updateOne({"inviteRequests._id":id},
+    {$set: {
+        "inviteRequests.$.Status":Status}
+    })  
+    if(updateresult.modifiedCount == 0) throw {status:500, message:"Change request status could not be sent"}
+    return res.status(200).json({
+        status:200,
+        success:true,
+        message:"Change request status sent!!!"
+    })
+    } catch (error) {
+       next(error) 
+    }
 
 }
-editSkill(){
 
-}
-AcceptInviteInTeam(){
-
-}
-RejectInviteInTeam(){
-
-}    
 }
 module.exports={
  UserController:new UserController()   
