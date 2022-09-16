@@ -126,10 +126,30 @@ return res.status(200).json({
    next(error) 
 }
 }
-RemoveTeam(){
+async UpdateTeam(req,res,next){
+    try {
+        const data={...req.body};
+        Object.entries(data).forEach((key)=>{
+            if(!data[key]) delete data[key]   
+ if([""," ",null,NaN,undefined].includes(key)) delete data[key];
+})
+const userID=req.user._id;
+ const {teamID}=req.params;
+ const team=await teammodel.find({owner:userID},{_id:teamID})
+ if(!team) throw {status:404,message:"No team was found with this specification"}
+ const updateTeam=await teammodel.updateOne({_id:teamID},{$set:data})
+ if(updateTeam.modifiedCount == 0) throw {status:500,message:"Update failed"} 
+ return res.status(200).json({
+     status:200,
+     success:true,
+     message:"Update Done"
+    })    
+} catch (error) {
+    next(error) 
+}
 
 }
-UpdateTeam(){
+RemoveTeam(){
 
 }
 RemoveUserFromTeam(){

@@ -39,3 +39,18 @@ Content-Type: application/json
 GET    http://localhost:8000/team/invite/6319c09bea47b0a4e431d661/zahra
 Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
+
+
+
+
+###update Team
+PUT  http://localhost:8000/team/update/6319c09bea47b0a4e431d661
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+{
+    "name":"Team Z",
+    "description":"Best Bakend Team"
+    
+}

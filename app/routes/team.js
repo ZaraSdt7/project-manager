@@ -9,6 +9,7 @@ router.post("/create",checklogin,createTeamValidator(),expressvalidatorMapper,Te
 router.get("/list",checklogin,TeamController.getlistofteam)
 router.get("/me",checklogin,TeamController.getMyTeams)
 router.get("/invite/:teamID/:user_name",checklogin,TeamController.inviteUsertoTeam)
+router.put("/update/:teamID",checklogin,TeamController.UpdateTeam)
 router.delete("/remove/:id",checklogin,mongoIDvalidation(),expressvalidatorMapper,TeamController.removeTeamByID)
 router.get("/:id",checklogin,mongoIDvalidation(),expressvalidatorMapper,TeamController.getTeamByID)
 module.exports={teamRouter:router}
