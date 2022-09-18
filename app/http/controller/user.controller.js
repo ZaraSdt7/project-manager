@@ -63,9 +63,29 @@ async UploadProfileImage(req,res,next){
 async getAllRequest(req,res,next){
     try {
     const userID=req.user._id;
-    const {inviteRequests}=await usermodel.findOne({_id:userID},{inviteRequests:1});
+    const inviteRequests=await usermodel.aggregate([
+        {
+            $match:{_id:userID}
+        },
+        // {
+            // $project:{
+            //     inviteRequests:1
+            // }
+        // },
+        {
+            $lookup:{
+                from:"users",
+                localField:"inviteRequests.caller",
+                foreignField:"user_name",
+                as:"callerinfo"
+            }
+        },
+        {
+            $unwind:"$callerinfo"
+        }
+    ]);
     return res.json({
-        requests:inviteRequests || []
+        requests:inviteRequests 
     })
     } catch (error) {
        next(error) 

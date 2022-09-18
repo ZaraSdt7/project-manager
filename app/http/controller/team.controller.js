@@ -58,12 +58,34 @@ async getTeamByID(req,res,next){
 async getMyTeams(req,res,next){
     try {
      const userID=req.user._id;
-     const team=await teammodel.find({
-    $or:[
-        {owner:userID},
-        {user:userID}
-    ]
-     })
+     const team=await teammodel.aggregate([
+     {
+      $match:{  
+        $or:[{owner:userID},{user:userID}] }
+     },
+     {
+        $lookup:{
+            from:"users",
+            localField:"owner",
+            foreignField:"_id",
+            as:"owner"
+        }
+     },
+     {
+        $project:{
+            "owner.user_name":1,
+            "owner.email":1,
+            "owner.mobile":1
+        }
+     },
+     {
+        $unwind:"$owner"
+     }
+    
+
+
+       
+    ])
      return res.status(201).json({
         status:200,
         success:true,
